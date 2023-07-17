@@ -1,3 +1,6 @@
+import React from 'react';
+import './MainArticles.css';
+
 export const MainArticle = ({
 	title,
 	image,

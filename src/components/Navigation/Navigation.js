@@ -1,4 +1,7 @@
-import { categoryNames } from './utils.js';
+import React from 'react';
+import { categoryNames } from '../../utils.js';
+import logo from '../../images/logo.svg';
+import './Navigation.css';
 
 export const Navigation = ({
 	onNavClick,
@@ -13,7 +16,7 @@ export const Navigation = ({
 			<a className="navigation__logo" data-href="index" href="#">
 				<img
 					className="navigation__logo-image"
-					src="./images/logo.svg"
+					src={logo}
 					alt="Логотип"
 				/>
 			</a>
