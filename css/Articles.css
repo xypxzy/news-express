@@ -1,0 +1,133 @@
+.article-date,
+.article-source {
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 24px;
+	text-transform: uppercase;
+}
+
+.article-source {
+	color: var(--color-grey);
+}
+
+.article-date {
+	color: var(--color-accent);
+}
+
+.article-date + .article-source::before {
+	content: ' · ';
+}
+
+.article-category {
+	display: block;
+	font-size: 14px;
+	line-height: 17px;
+	color: var(--color-accent);
+	text-transform: uppercase;
+	font-weight: 700;
+}
+
+.article-img {
+	background: #ccc;
+	display: block;
+	width: 100%;
+	object-fit: cover;
+}
+
+.articles {
+	margin-bottom: 135px;
+}
+
+.articles__big-column {
+	grid-column: span 9;
+}
+
+.articles__small-column {
+	grid-column: 10/-1;
+}
+
+.main-article {
+	margin-bottom: 95px;
+	display: grid;
+	grid-template-columns: repeat(9, var(--grid-column-width));
+	gap: var(--grid-gap);
+}
+
+.main-article:last-child {
+	margin-bottom: 0;
+}
+
+.main-article__image-container {
+	position: relative;
+	grid-column: span 3;
+	overflow: hidden;
+	min-height: 185px;
+	max-height: 344px;
+}
+
+.main-article__img {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.main-article__content {
+	grid-column: 4/-1;
+	padding-right: 63px;
+}
+
+/* TODO: ВЫПИЛИТЬ НАВЕРНОЕ */
+.main-article__category {
+	margin-bottom: 7px;
+}
+
+.main-article__title {
+	margin-bottom: 34px;
+	font-size: 42px;
+	line-height: 50px;
+	font-weight: 700;
+	color: var(--color-primary);
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.main-article__text {
+	margin-bottom: 34px;
+	font-size: 22px;
+	line-height: 26px;
+	color: var(--color-primary);
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.main-article__caption {
+	margin: 28px 0 0;
+	display: block;
+}
+
+.small-article {
+	margin-bottom: 35px;
+	padding-left: 11px;
+	border-left: 9px solid var(--color-primary);
+}
+
+.small-article:last-child {
+	margin-bottom: 0;
+}
+
+.small-article__title {
+	margin-bottom: 14px;
+	font-weight: 700;
+	font-size: 20px;
+	line-height: 24px;
+	color: var(--color-primary);
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
