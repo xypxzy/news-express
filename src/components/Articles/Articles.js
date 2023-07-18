@@ -3,7 +3,7 @@ import { MainArticle } from '../MainArticles/MainArticles.js';
 import { SmallArticle } from '../SmallArticle/SmallArticle.js';
 import './Articles.css';
 
-export const Articles = ({ articles }) => {
+export const Articles = ({ articles, onArticleClick }) => {
 	return (
 		<section className="articles">
 			<div className="container grid">
@@ -25,6 +25,7 @@ export const Articles = ({ articles }) => {
 										({ id }) => item.source_id === id
 									).name
 								}
+								onClick={() => onArticleClick(item.id)}
 							/>
 						);
 					})}
@@ -41,6 +42,7 @@ export const Articles = ({ articles }) => {
 									).name
 								}
 								date={item.date}
+								onClick={() => onArticleClick(item.id)}
 							/>
 						);
 					})}

@@ -11,8 +11,8 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.js$/,
-				use: 'babel-loader',
+				test: /\.(js|jsx)$/,
+				use: ['babel-loader'],
 				exclude: /node_modules/,
 			},
 			{
@@ -23,7 +23,15 @@ module.exports = {
 				test: /\.svg$/,
 				type: 'asset/resource',
 			},
+			{
+				test: /\.(ts|tsx)$/,
+				use: ['ts-loader'],
+				exclude: /node_modules/,
+			},
 		],
+	},
+	resolve: {
+		extensions: ['*', '.js', '.jsx'],
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
