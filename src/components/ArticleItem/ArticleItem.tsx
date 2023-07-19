@@ -1,71 +1,70 @@
-import React from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { RelatedSmallArticle } from '../RelatedSmallArticle/RelatedSmallArticle';
 import { SingleLineTitleArticle } from '../SingleLineTitleArticle/SingleLineTitleArticle';
 import './ArticleItem.css';
+import { ArticleItemAPI } from '../../types';
+import { beautifyDate } from '../../utils';
 
-export const Article = () => {
+interface ArticleProps {
+	id: number;
+}
+
+export const Article: FC<ArticleProps> = ({ id }) => {
+	const [articleItem, setArticleItem] = useState<ArticleItemAPI | null>(null);
+
+	useEffect(() => {
+		fetch(`https://frontend.karpovcourses.net/api/v2/news/full/${id}`)
+			.then((response) => response.json())
+			.then(setArticleItem);
+	}, [id]);
+
+	if (articleItem === null) {
+		return null;
+	}
+
 	return (
 		<section className="article-page">
 			<article className="article">
-				<section className="article__hero">
-					<div className="container article__hero-content">
-						<div className="grid">
-							<h1 className="article__hero-title">
-								Lorem ipsum dolor sit amet consectetur
-								adipisicing elit. Atque enim vero perspiciatis
-								fugit explicabo, ullam praesentium sit autem
-								repellendus nesciunt ipsum blanditiis voluptatum
-								porro laboriosam cum sunt quod nulla excepturi.
-								Cupiditate nostrum cumque ducimus, provident,
-								doloremque voluptates porro quas non enim illum
-								fugit magni rem blanditiis beatae praesentium
-								laborum harum illo possimus tenetur! Aut in
-								quisquam illum odit! Ex, molestiae.
-							</h1>
-						</div>
-						<div className="grid">
-							<span className="article-category article__category">
-								News
-							</span>
-							<span className="article-date article__date">
-								9 may
-							</span>
-						</div>
-					</div>
-				</section>
-				<div className="grid container article__main">
-					<div className="article__content">
-						<div className="article__title-container">
-							<h1 className="article__title">
-								Lorem ipsum dolor sit amet, consectetur
-								adipisicing elit. Deleniti quo et magni ullam
-								modi, reiciendis expedita ea ipsam impedit aut.
-								Laboriosam voluptates quisquam natus vel
-								veritatis ipsa adipisci magnam facilis?
-							</h1>
+				{articleItem.image.length ? (
+					<section
+						className="article__hero"
+						style={{ backgroundImage: `url(${articleItem.image})` }}
+					>
+						<div className="container article__hero-content">
+							<div className="grid">
+								<h1 className="article__hero-title">
+									{articleItem.title}
+								</h1>
+							</div>
 							<div className="grid">
 								<span className="article-category article__category">
-									News
+									{articleItem.category.name}
 								</span>
 								<span className="article-date article__date">
-									9 may
+									{beautifyDate(articleItem.date)}
 								</span>
 							</div>
 						</div>
-						<p>
-							Lorem ipsum dolor sit amet consectetur, adipisicing
-							elit. Harum
-						</p>
-						<p>
-							Lorem ipsum dolor sit amet consectetur, adipisicing
-							elit.
-						</p>
-						<img src="" alt="logo" />
-						<p>
-							Lorem ipsum dolor sit amet consectetur, adipisicing
-							elit.
-						</p>
-						<img src="" alt="logo" />
+					</section>
+				) : null}
+				<div className="grid container article__main">
+					<div className="article__content">
+						{!articleItem.image.length ? (
+							<div className="article__title-container">
+								<h1 className="article__title">
+									{articleItem.title}
+								</h1>
+								<div className="grid">
+									<span className="article-category article__category">
+										{articleItem.category.name}
+									</span>
+									<span className="article-date article__date">
+										{beautifyDate(articleItem.date)}
+									</span>
+								</div>
+							</div>
+						) : null}
+						<p>{articleItem.text}</p>
 					</div>
 
 					<div className="article__small-column">

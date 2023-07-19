@@ -4,9 +4,23 @@ export interface NewsAPI {
 	items: Article[];
 }
 
+export interface ArticleItemAPI {
+	id: number;
+	lang: string;
+	date: string;
+	title: string;
+	description: string;
+	image: string;
+	link: string;
+	text: string;
+	category: Category;
+	source: Source;
+}
+
 export interface Source {
 	id: number;
 	name: string;
+	site?: string;
 }
 
 export interface Category {
@@ -16,7 +30,7 @@ export interface Category {
 
 export interface Article {
 	category_id: number;
-	date: Date;
+	date: string;
 	description: string;
 	id: number;
 	image: string;

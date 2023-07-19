@@ -54,7 +54,7 @@ const App = () => {
 
 			<main>
 				{articleId !== null ? (
-					<Article />
+					<Article id={articleId} />
 				) : (
 					<Articles
 						articles={articles}
