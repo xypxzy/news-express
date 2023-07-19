@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { FC } from 'react';
 import './SmallArticle.css';
 
-export const SmallArticle = ({ title, source, date, onClick }) => {
+interface SmallArticleProps {
+	title: string;
+	source: string;
+	date: Date;
+	onClick: () => void;
+}
+
+export const SmallArticle: FC<SmallArticleProps> = ({
+	title,
+	source,
+	date,
+	onClick,
+}) => {
 	return (
 		<article className="small-article" onClick={onClick}>
 			<h2 className="small-article__title">{title}</h2>

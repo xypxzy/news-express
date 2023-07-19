@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { FC } from 'react';
 import './MainArticles.css';
 
-export const MainArticle = ({
+interface MainArticleProps {
+	title: string;
+	image: string;
+	category: string;
+	description: string;
+	source: string;
+	onClick: () => void;
+}
+
+export const MainArticle: FC<MainArticleProps> = ({
 	title,
 	image,
 	category,

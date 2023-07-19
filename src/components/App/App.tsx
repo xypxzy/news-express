@@ -1,25 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { Articles } from '../Articles/Articles.js';
-import { Article } from '../ArticleItem/ArticleItem.jsx';
-import { Navigation } from '../Navigation/Navigation.js';
-import { categoryIds } from '../../utils.js';
+import React, { useState, useEffect, MouseEvent } from 'react';
+import { Articles } from '../Articles/Articles';
+import { Article } from '../ArticleItem/ArticleItem';
+import { Navigation } from '../Navigation/Navigation';
+import { categoryIds } from '../../utils';
 import './App.css';
+import { NewsAPI } from '../../types';
 
 const App = () => {
-	const [articleId, setArticleId] = useState(null);
-	const [category, setCategory] = useState('index');
-	const [articles, setArticles] = useState({
+	const [articleId, setArticleId] = useState<number | null>(null);
+	const [category, setCategory] = useState<string>('index');
+	const [articles, setArticles] = useState<NewsAPI>({
 		items: [],
 		categories: [],
 		sources: [],
 	});
 
-	const onNavClick = (e) => {
+	const onNavClick = (e: MouseEvent<HTMLElement>) => {
 		e.preventDefault();
-		setCategory(e.currentTarget.dataset.href);
+
+		setArticleId(null);
+
+		const category = e.currentTarget.dataset.href;
+		if (category) setCategory(category);
 	};
 
-	const onArticleClick = (id) => {
+	const onArticleClick = (id: number) => {
 		setArticleId(id);
 	};
 
@@ -29,7 +34,7 @@ const App = () => {
 				categoryIds[category] || ''
 		)
 			.then((response) => response.json())
-			.then((response) => {
+			.then((response: NewsAPI) => {
 				setArticles(response);
 			});
 	}, [category]);

@@ -1,7 +1,8 @@
 import React from 'react';
-import { RelatedSmallArticle } from '../RelatedSmallArticle/RelatedSmallArticle.jsx';
-import { SingleLineTitleArticle } from '../SingleLineTitleArticle/SingleLineTitleArticle.jsx';
+import { RelatedSmallArticle } from '../RelatedSmallArticle/RelatedSmallArticle';
+import { SingleLineTitleArticle } from '../SingleLineTitleArticle/SingleLineTitleArticle';
 import './ArticleItem.css';
+
 export const Article = () => {
 	return (
 		<section className="article-page">
