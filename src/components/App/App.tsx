@@ -1,6 +1,6 @@
 import React, { useState, useEffect, MouseEvent } from 'react';
 import { Articles } from '../Articles/Articles';
-import { Article } from '../ArticleItem/ArticleItem';
+import { ArticleItem } from '../ArticleItem/ArticleItem';
 import { Navigation } from '../Navigation/Navigation';
 import { categoryIds } from '../../utils';
 import './App.css';
@@ -54,7 +54,12 @@ const App = () => {
 
 			<main>
 				{articleId !== null ? (
-					<Article id={articleId} />
+					<ArticleItem
+						id={articleId}
+						categories={articles.categories}
+						sources={articles.sources}
+						onArticleClick={onArticleClick}
+					/>
 				) : (
 					<Articles
 						articles={articles}

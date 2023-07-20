@@ -17,6 +17,10 @@ export interface ArticleItemAPI {
 	source: Source;
 }
 
+export interface RelatedArticlesAPI {
+	items: Article[];
+}
+
 export interface Source {
 	id: number;
 	name: string;
