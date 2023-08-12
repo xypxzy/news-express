@@ -36,6 +36,10 @@
 	grid-column: 5/-1;
 }
 
+.navigation--footer .navigation__link {
+	color: var(--color-white);
+}
+
 .navigation--header .navigation__link {
 	color: var(--color-primary);
 }
@@ -56,10 +60,6 @@
 
 .navigation--footer .navigation__list {
 	grid-column: 3/-1;
-}
-
-.navigation--footer .navigation__link {
-	color: var(--color-white);
 }
 
 .navigation--footer .navigation__link--active,
