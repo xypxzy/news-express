@@ -1,77 +1,37 @@
-import React, { useState, useEffect, MouseEvent } from 'react';
+import React, { useEffect } from 'react';
 import { Articles } from '../Articles/Articles';
 import { ArticleItem } from '../ArticleItem/ArticleItem';
 import { Navigation } from '../Navigation/Navigation';
-import { categoryIds } from '../../utils';
 import './App.css';
-import { NewsAPI } from '../../types';
-
-console.log('hello');
+import { Route, Routes } from 'react-router-dom';
+import { useLocation } from 'react-router';
 
 const App = () => {
-  const [articleId, setArticleId] = useState<number | null>(null);
-  const [category, setCategory] = useState<string>('index');
-  const [articles, setArticles] = useState<NewsAPI>({
-    items: [],
-    categories: [],
-    sources: [],
-  });
-
-  const onNavClick = (e: MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-
-    setArticleId(null);
-
-    const category = e.currentTarget.dataset.href;
-    if (category) setCategory(category);
-  };
-
-  const onArticleClick = (id: number) => {
-    setArticleId(id);
-  };
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    fetch('https://frontend.karpovcourses.net/api/v2/ru/news/' + categoryIds[category] || '')
-      .then((response) => response.json())
-      .then((response: NewsAPI) => {
-        setArticles(response);
-      });
-  }, [category]);
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
-    <React.Fragment>
+    <>
       <header className="header">
         <div className="container">
-          <Navigation
-            placement="header"
-            onNavClick={onNavClick}
-            currentCategory={category}
-            className="header__navigation"
-          />
+          <Navigation placement="header" className="header__navigation" />
         </div>
       </header>
 
       <main>
-        {articleId !== null ? (
-          <ArticleItem
-            id={articleId}
-            categories={articles.categories}
-            sources={articles.sources}
-            onArticleClick={onArticleClick}
-          />
-        ) : (
-          <Articles articles={articles} onArticleClick={onArticleClick} />
-        )}
+        <Routes>
+          <Route path={`/article/:id`} element={<ArticleItem />} />
+          <Route path={`/:categoryId`} element={<Articles />} />
+          <Route path={'/'} element={<Articles />} />
+        </Routes>
       </main>
 
       <footer className="footer">
         <div className="container">
-          <Navigation
-            placement="footer"
-            onNavClick={onNavClick}
-            currentCategory={category}
-            className="footer__navigation"
-          />
+          <Navigation placement="footer" className="footer__navigation" />
           <div className="footer__bottom">
             <p className="footer__text">
               Сделано на Frontend курсе в{' '}
@@ -83,7 +43,7 @@ const App = () => {
           </div>
         </div>
       </footer>
-    </React.Fragment>
+    </>
   );
 };
 
