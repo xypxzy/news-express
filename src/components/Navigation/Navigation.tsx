@@ -14,6 +14,7 @@ export const Navigation: FC<NavigationProps> = ({ className = '', placement = 'h
     <nav className={`grid navigation navigation--${placement} ${className}`}>
       <NavLink to={'/'} className="navigation__logo">
         <img className="navigation__logo-image" src={logo} alt="Логотип" />
+        {/*<Logo className="navigation__logo-image" />*/}
       </NavLink>
       <ul className="navigation__list">
         {['index', 'fashion', 'technologies', 'sport', 'karpov'].map((item) => {
