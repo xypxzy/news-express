@@ -3,8 +3,8 @@ import { RelatedSmallArticle } from '../RelatedSmallArticle/RelatedSmallArticle'
 import { SingleLineTitleArticle } from '../SingleLineTitleArticle/SingleLineTitleArticle';
 import './ArticleItem.css';
 import { Article, ArticleItemAPI, Category, RelatedArticlesAPI, Source } from '../../types';
-import { beautifyDate } from '../../utils';
 import { useParams } from 'react-router';
+import ArticleItemInfo from '../ArticleItemInfo/ArticleItemInfo';
 
 export const ArticleItem = () => {
   const [articleItem, setArticleItem] = useState<ArticleItemAPI | null>(null);
@@ -47,10 +47,13 @@ export const ArticleItem = () => {
               <div className="grid">
                 <h1 className="article__hero-title">{articleItem.title}</h1>
               </div>
-              <div className="grid">
-                <span className="article-category article__category">{articleItem.category.name}</span>
-                <span className="article-date article__date">{beautifyDate(articleItem.date)}</span>
-              </div>
+              <ArticleItemInfo
+                categoryName={articleItem.category.name}
+                date={articleItem.date}
+                author={articleItem.author}
+                sourceLink={articleItem.link}
+                sourceName={articleItem.source.name}
+              />
             </div>
           </section>
         ) : null}
@@ -59,10 +62,13 @@ export const ArticleItem = () => {
             {!articleItem.image.length ? (
               <div className="article__title-container">
                 <h1 className="article__title">{articleItem.title}</h1>
-                <div className="grid">
-                  <span className="article-category article__category">{articleItem.category.name}</span>
-                  <span className="article-date article__date">{beautifyDate(articleItem.date)}</span>
-                </div>
+                <ArticleItemInfo
+                  categoryName={articleItem.category.name}
+                  date={articleItem.date}
+                  author={articleItem.author}
+                  sourceLink={articleItem.link}
+                  sourceName={articleItem.source.name}
+                />
               </div>
             ) : null}
             <p>{articleItem.text}</p>
